@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class() extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('leads', function (Blueprint $table) {
+            $table->boolean('is_phone_verified')->after('phone_number')->default(0);
+            $table->boolean('is_email_verified')->after('email')->default(0);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('leads', function (Blueprint $table) {
+            $table->dropColumn('is_phone_verified');
+            $table->dropColumn('is_email_verified');
+        });
+    }
+};
